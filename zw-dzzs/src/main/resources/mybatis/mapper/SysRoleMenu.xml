@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.longicorn.dzzs.dao.SysRoleMenuDao">
+    <resultMap id="sysRoleMenuResultMap" type="SysRoleMenu">
+        <id property="id" column="id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="menuId" column="menu_id"/>
+    </resultMap>
+
+    <select id="get" parameterType="Long" resultMap="sysRoleMenuResultMap">
+        SELECT * FROM sys_role_menu WHERE id=#{id}
+    </select>
+
+    <insert id="save" parameterType="SysRoleMenu" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_role_menu (id,role_id,menu_id) values (#{id},#{roleId},#{menuId});
+    </insert>
+
+    <update id="update" parameterType="SysRoleMenu">
+        update sys_role_menu
+        <set>
+            <if test="roleId !=null and roleId!= ''">
+                role_id=#{roleId},
+            </if>
+            <if test="menuId !=null and menuId!= ''">
+                menu_id=#{menuId}
+            </if>
+        </set>
+        where id=#{id};
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM sys_role_menu WHERE id=#{id}
+    </delete>
+</mapper>

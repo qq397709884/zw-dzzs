@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="cn.longicorn.dzzs.entity.SysUser" alias="SysUser"/>
+        <typeAlias type="cn.longicorn.dzzs.entity.SysUserRole" alias="SysUserRole"/>
+        <typeAlias type="cn.longicorn.dzzs.entity.SysRole" alias="SysRole"/>
+        <typeAlias type="cn.longicorn.dzzs.entity.SysRoleMenu" alias="SysRoleMenu"/>
+        <typeAlias type="cn.longicorn.dzzs.entity.SysMenu" alias="SysMenu"/>
+        <typeAlias type="cn.longicorn.dzzs.entity.SysDept" alias="SysDept"/>
+        <typeAlias type="cn.longicorn.dzzs.entity.SysRoleDept" alias="SysRoleDept"/>
+    </typeAliases>
+    <plugins>
+        <plugin interceptor="cn.longicorn.modules.data.mybatis.PagePlugin">
+            <property name="dialect" value="mysql5" />
+            <property name="pageSqlId" value=".*Page.*" />
+        </plugin>
+    </plugins>
+</configuration>

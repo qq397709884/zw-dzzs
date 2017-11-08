@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.longicorn.dzzs.dao.SysUserRoleDao">
+    <resultMap id="sysUserRoleResultMap" type="SysUserRole">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="roleId" column="role_id"/>
+    </resultMap>
+
+    <select id="get" parameterType="Long" resultMap="sysUserRoleResultMap">
+        SELECT * FROM sys_user_role WHERE id=#{id}
+    </select>
+
+    <insert id="save" parameterType="SysUserRole" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user_role (id,user_id,role_id) values (#{id},#{userId},#{roleId});
+    </insert>
+
+    <update id="update" parameterType="SysUserRole">
+        update sys_user_role
+        <set>
+            <if test="userId!=null and userId!=''">
+                user_id=#{userId},
+            </if>
+            <if test="roleId!=null and roleId!=''">
+                role_id=#{roleId}
+            </if>
+        </set>
+        where id=#{id};
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM sys_user_role WHERE id=#{id}
+    </delete>
+</mapper>

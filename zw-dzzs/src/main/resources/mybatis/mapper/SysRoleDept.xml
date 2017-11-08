@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.longicorn.dzzs.dao.SysRoleDeptDao">
+    <resultMap id="sysRoleDeptResultMap" type="SysRoleDept">
+        <id property="id" column="id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="deptId" column="dept_id"/>
+    </resultMap>
+
+    <select id="get" parameterType="Long" resultMap="sysRoleDeptResultMap">
+        SELECT * FROM sys_role_dept WHERE id=#{id}
+    </select>
+
+    <insert id="save" parameterType="SysRoleDept" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_role_dept (id,role_id,dept_id) values (#{id},#{roleId},#{deptId});
+    </insert>
+
+    <update id="update" parameterType="SysRoleDept">
+        update sys_role_dept
+        <set>
+            <if test="roleId !=null and roleId!=''">
+                role_id=#{roleId},
+            </if>
+            <if test="deptId !=null and deptId !=''">
+                dept_id=#{deptId}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM sys_role_dept WHERE id=#{id}
+    </delete>
+</mapper>
